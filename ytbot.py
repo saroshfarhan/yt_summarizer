@@ -2,7 +2,9 @@
 import gradio as gr
 import re  #For extracting video id
 from youtube_transcript_api import YouTubeTranscriptApi  # For extracting transcripts from YouTube videos
-from langchain.text_splitter import RecursiveCharacterTextSplitter  # For splitting text into manageable segments
+#from langchain.text_splitter import RecursiveCharacterTextSplitter  
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+# For splitting text into manageable segments
 from ibm_watsonx_ai.foundation_models.utils.enums import ModelTypes  # For specifying model types
 from ibm_watsonx_ai import APIClient, Credentials  # For API client and credentials management
 from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams  # For managing model parameters
@@ -11,8 +13,10 @@ from langchain_ibm import WatsonxLLM, WatsonxEmbeddings  # For interacting with 
 from ibm_watsonx_ai.foundation_models.utils import get_embedding_model_specs  # For retrieving model specifications
 from ibm_watsonx_ai.foundation_models.utils.enums import EmbeddingTypes  # For specifying types of embeddings
 from langchain_community.vectorstores import FAISS  # For efficient vector storage and similarity search
-from langchain.chains import LLMChain  # For creating chains of operations with LLMs
-from langchain.prompts import PromptTemplate  # For defining prompt templates
+# from langchain.chains import LLMChain  # For creating chains of operations with LLMs
+# from langchain.prompts import PromptTemplate  # For defining prompt templates
+from langchain_classic.chains.llm import LLMChain
+from langchain_core.prompts import PromptTemplate
  
 def get_video_id(url):    
     # Regex pattern to match YouTube video URLs

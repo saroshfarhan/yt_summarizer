@@ -1,13 +1,18 @@
 # Import necessary libraries for the YouTube bot
+from dotenv import load_dotenv
+load_dotenv()
 import gradio as gr
 import re  #For extracting video id 
 from youtube_transcript_api import YouTubeTranscriptApi  # For extracting transcripts from YouTube videos
-from langchain.text_splitter import RecursiveCharacterTextSplitter # Updated import for text splitting
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings  # For Google Gemini LLM and embeddings
 import os  # For environment variable management
 from langchain_community.vectorstores import FAISS  # For efficient vector storage and similarity search
-from langchain.chains.llm import LLMChain  # For creating chains of operations with LLMs
-from langchain.prompts import PromptTemplate  # For defining prompt templates
+from langchain_classic.chains.llm import LLMChain
+from langchain_core.prompts import PromptTemplate
+# from langchain.chains.llm import LLMChain  # For creating chains of operations with LLMs
+# from langchain.prompts import PromptTemplate  # For defining prompt templates
 
 def get_video_id(url):    
     # Regex pattern to match YouTube video URLs
@@ -49,6 +54,7 @@ def process(transcript):
         try:
             # Append the text and its start time to the output string
             txt += f"Text: {i.text} Start: {i.start}\n"
+            # txt += f"Text: {i.get('text','')} Start: {i.get('start','')}\n"
         except KeyError:
             # If there is an issue accessing 'text' or 'start', skip this entry
             pass
@@ -69,7 +75,7 @@ def chunk_transcript(processed_transcript, chunk_size=200, chunk_overlap=20):
 
 def setup_credentials():
     # Define the model ID for Google Gemini
-    model_id = "gemini-1.5-pro"
+    model_id = "gemini-3-flash-preview"
     
     # Get the Google API key from environment variable
     # Set this as: export GOOGLE_API_KEY="your-api-key-here"
