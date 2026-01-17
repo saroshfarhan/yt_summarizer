@@ -53,12 +53,33 @@ The tool uses a predefined prompt template and an LLM to generate concise summar
    ```
 
 ## Usage
+
+### Option 1: Run Locally
 1. Launch the application:
    ```bash
    python ytbot_gemini.py
    ```
 2. Open the Gradio interface in your browser.
 3. Enter the YouTube video URL and choose to either summarize the video or ask a question about it.
+
+### Option 2: Run with Docker
+1. Build the Docker image (if not already built):
+   ```bash
+   docker build -t yt_summarizer .
+   ```
+2. Run the Docker container:
+   ```bash
+   docker run -p 7860:7860 yt_summarizer
+   ```
+3. Open your browser and navigate to `http://localhost:7860`.
+
+### Environment Setup
+Before running the application, ensure you create a `.env` file in the project root directory with the following content:
+
+```
+GOOGLE_API_KEY=your-google-api-key
+```
+Replace `your-google-api-key` with your actual Google API key for the Gemini model.
 
 ## Example Workflow
 1. **Summarization**:
