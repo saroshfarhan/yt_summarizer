@@ -69,7 +69,7 @@ The tool uses a predefined prompt template and an LLM to generate concise summar
    - Output: A detailed answer based on the video transcript.
 
 ### Sample Output
-![Sample Output](img/sample_output.png)
+![Sample Output](img/sample_test.png)
 
 ## Architecture Diagram
 ```plaintext
